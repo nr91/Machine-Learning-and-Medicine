@@ -12,7 +12,7 @@ Embeddings are representations of a piece of data projected to a n-dimensional s
 
 We will generate entity embeddings for the features in the Dermatology Data Set in the UCI Machine Learning Repo. This dataset consists of 366 cases of erythemato-squamous diseases, which often share several similarities particularly on histopathology. There are 6 disease categories: psoriasis, seborrheic dermatitis, lichen planus, pityriasis rosea, chronic dermatitis, and pityriasis rubra pilaris. The dataset looks at 34 features - 11 clinical features (i.e. age, presence of itching, location on body) and 22 histopathological features of tissue biopsy samples seen on microscopy. For more information on the dataset, check out <https://archive.ics.uci.edu/ml/datasets/dermatology>.
 
-We will be using R and PyTorch (via the [Reticulate R package](https://rstudio.github.io/reticulate/) for this project.
+We will be using R and PyTorch via the [Reticulate R package](https://rstudio.github.io/reticulate/) for this project.
 
 ### Import useful libraries/packages
 
