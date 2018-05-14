@@ -1,6 +1,6 @@
 Entity Embeddings for interpretation of Clinical and Histopathological features in Dermatological Diseases
 ================
-NR
+***NR***
 
 In this repo, I will demonstrate how embeddings can be used to explore and visualize relationships between categorical variables. The idea of applying embeddings to categorical data was suggested by [Guo and Berkhahn](https://arxiv.org/abs/1604.06737). I was first introduced to the idea while watching the [Fast.ai](http://www.fast.ai/) course lectures, which I recommend to anyone interested in deep learning.
 
