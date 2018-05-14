@@ -67,9 +67,9 @@ levels(data$diagnosis) <- c('Benign','Malignant')
 #### Class distribution
 
 ``` r
-ggplot(data, aes(x=diagnosis)) +
-  geom_bar(stat = 'count', fill='steelblue', width=0.6) +
-  labs(x='Diagnosis', y = 'Count')
+ggplot(data, aes(x = diagnosis)) +
+  geom_bar(stat = 'count', fill = 'steelblue', width=0.6) +
+  labs(x = 'Diagnosis', y = 'Count')
 ```
 
 ![](bc_nn_git_files/figure-markdown_github/classes-1.png) <br>
@@ -77,7 +77,7 @@ ggplot(data, aes(x=diagnosis)) +
 #### Heatmap of correlations
 
 ``` r
-corrplot(cor(as.matrix(data%>%mutate(diagnosis=as.numeric(diagnosis)))), method = 'color')
+corrplot(cor(as.matrix(data %>% mutate(diagnosis = as.numeric(diagnosis)))), method = 'color')
 ```
 
 ![](bc_nn_git_files/figure-markdown_github/corrplot-1.png) <br>
@@ -135,6 +135,7 @@ train_features = torch.from_numpy(r.train_features.astype('float32'))
 train_labels = torch.from_numpy(r.train_labels.astype('float32'))
 test_features = torch.from_numpy(r.test_features.astype('float32'))
 test_labels = torch.from_numpy(r.test_labels.astype('float32'))  
+
 # Load data into pytorch dataloader
 trainset = TensorDataset(train_features, train_labels)
 train_loader = DataLoader(dataset=trainset, batch_size=20, shuffle=True)
@@ -152,8 +153,10 @@ We will use a simple feed-forward neural network with a hidden layer of 100 unit
 #### Python Code
 # Set seed
 torch.manual_seed(1)
+
 # Set device type
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu') 
+
 # Network
 class net(nn.Module):
     def __init__(self):
@@ -181,8 +184,10 @@ We will use the Adam optimizer with a learning rate of 0.001. Using a scheduler,
 #### Python Code
 # Optimizer
 optimizer = torch.optim.Adam(model.parameters(),lr=0.001)
+
 # Decay
 scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=100, gamma=0.1)
+
 # Loss fxn
 criterion = nn.BCELoss()
 ```
@@ -214,6 +219,7 @@ for epoch in range(epochs):
     preds = torch.round(outputs)
     train_corrects += preds.eq(labels).sum().item()
     optimizer.step()
+    
   train_acc = train_corrects/len(train_loader.dataset)
   train_loss = train_loss/len(train_loader)
   train_losses.append(train_loss)
@@ -230,6 +236,7 @@ for epoch in range(epochs):
         test_loss += loss.item()
         preds = torch.round(outputs)
         test_corrects += preds.eq(labels).sum().item()
+        
     test_acc = test_corrects/len(test_loader.dataset)
     test_loss = test_loss/len(test_loader)
     test_losses.append(test_loss)
