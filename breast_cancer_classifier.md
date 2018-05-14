@@ -278,7 +278,7 @@ plot.roc(as.numeric(test_labels), as.numeric(py$preds), print.auc=T)
 
 ![](bc_nn_git_files/figure-markdown_github/auc-1.png)
 
-With our neural net classifier, we obtain a classification accuracy of 94.7% and an AUC of 0.98. Not bad!
+With our neural net classifier, we obtain a classification accuracy of 94.7% and an AUC of 0.98. Not bad! In summary, the features of cell nuclei in a FNA biopsy can tell us whether a breast mass is likely to be benign or malignant with remarkable accuracy. Of course, determining these features on individual biopsies requires a great deal of time, money, and effort.
 
 <br>
 
