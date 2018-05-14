@@ -52,14 +52,14 @@ plot_missing(data)
 
 ![](catembed_Derm_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
-It appears **Age** has some missing variables - let's drop this feature. We will also drop **family.history** since the majority of the cases have no family history.
+It appears **Age** has some missing variables - we will drop this feature. We will also drop **family.history** since the majority of the cases have no family history.
 
 ``` r
 # Drop age and family history
 data <- data %>% select(-c(Age, family.history))
 ```
 
-<br> Now we are finished preprocessing our dataset. We will split the data into a train (80%) and test set (20%). We will also separate the features (x) from the label (y). We have 6 label classes (1 through 6), but because python uses zero-based-numbering, we will subtract 1 from the label vectors. We also obtain a list of the number of unique levels for each feature which we will use for creation of the embeddings.
+<br> Now that we are finished preprocessing our dataset, we will split the data into a train (80%) and test set (20%). We will also separate the features (x) from the label (y). We have 6 label classes (1 through 6), but because python uses zero-based-numbering, we will subtract 1 from the label vectors. We also obtain a list of the number of unique levels for each feature which we will use for creation of the embeddings.
 
 ``` r
 # Set seed
@@ -99,7 +99,7 @@ test_y <- data.matrix(test_y) - 1
 Create a neural network classifier
 ----------------------------------
 
-Now we will create a neural network classifier consisting of 32 embeddings, one for each feature, followed by a fully connected layer and an output layer. Most of our features have 4 levels (0, 1, 2, and 3), so we will use an embedding size of 2 for each feature to keep it simple. Using PyTorch's ModuleList, we create an embedding for each feature. The embeddings are concatenated and serve as the input for the first fully connected layer. This is followed by a softmax layer consisting of 6 outputs corresponding to the 6 possible conditions.
+Now we will create a neural network classifier that utilizes embeddings for each feature. Most of our features have 4 levels (0, 1, 2, and 3), so we will use an embedding size of 2 for each feature to keep it simple. The embeddings are concatenated and serve as the input for the first fully connected layer. Our final layer is a softmax layer consisting of 6 outputs corresponding to the 6 possible conditions.
 
 We will use Relu activation functions for each fully connected layer and softmax activation for the final output layer. We also use dropout on the penultimate layer to control overfitting. Our loss will be calculated using crossentropy. For training, we will use the SGD optimizer with a learning rate of 0.01.
 
@@ -161,37 +161,37 @@ epochs=750
 train_losses=[]
 test_losses=[]
 for epoch in range(epochs):
-  train_loss=0
-  running_corrects=0
-  # Training loop
-  model.train()
-  for features, labels in train_loader:
-    features, labels = features.to(device), labels.to(device)
-    optimizer.zero_grad()
-    outputs = model(features)
-    loss = loss_func(outputs, labels)
-    loss.backward()
-    train_loss += loss.item()
-    preds = torch.max(outputs, 1)[1]
-    running_corrects += preds.eq(labels).sum().item()
-    optimizer.step()
-  train_acc = running_corrects/len(train_loader.dataset)
-  train_loss = train_loss/len(train_loader)
-  train_losses.append(train_loss)
+    train_loss=0
+    running_corrects=0
+    # Training loop
+    model.train()
+    for features, labels in train_loader:
+        features, labels = features.to(device), labels.to(device)
+        optimizer.zero_grad()
+        outputs = model(features)
+        loss = loss_func(outputs, labels)
+        loss.backward()
+        train_loss += loss.item()
+        preds = torch.max(outputs, 1)[1]
+        running_corrects += preds.eq(labels).sum().item()
+        optimizer.step()
+    train_acc = running_corrects/len(train_loader.dataset)
+    train_loss = train_loss/len(train_loader)
+    train_losses.append(train_loss)
   
-  # Evaluation loop
-  model.eval()
-  with torch.no_grad():
-    features, labels = x_test, y_test
-    features, labels = features.to(device), labels.to(device)
-    outputs = model(features)
-    loss = loss_func(outputs, labels)
-    test_loss=loss.item()
-    test_losses.append(test_loss)
-    preds = torch.max(outputs, 1)[1]
-    corrects = preds.eq(labels).sum().item()
-    test_acc = corrects/len(x_test)
-  print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}, Test Loss: {:.3f}, Test Accuracy: {:.3%}".format(epoch + 1, train_loss, train_acc, test_loss, test_acc))
+    # Evaluation loop
+    model.eval()
+    with torch.no_grad():
+        features, labels = x_test, y_test
+        features, labels = features.to(device), labels.to(device)
+        outputs = model(features)
+        loss = loss_func(outputs, labels)
+        test_loss=loss.item()
+        test_losses.append(test_loss)
+        preds = torch.max(outputs, 1)[1]
+        corrects = preds.eq(labels).sum().item()
+        test_acc = corrects/len(x_test)
+    print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}, Test Loss: {:.3f}, Test Accuracy: {:.3%}".format(epoch + 1, train_loss, train_acc, test_loss, test_acc))
 ```
 
 #### Training Results:
