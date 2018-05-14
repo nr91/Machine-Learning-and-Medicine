@@ -2,7 +2,7 @@ Entity Embeddings for interpretation of Clinical and Histopathological features 
 ================
 NR
 
-In this repo, I will demonstrate how embeddings can be used to explore and visualize relationships between categorical variables. The idea of applying embeddings to categorical data was suggested by Guo and Berkhahn (<https://arxiv.org/abs/1604.06737>). I was first introduced to the idea while watching the Fast.ai course lectures (<http://www.fast.ai/>), which I recommend to anyone interested in deep learning.
+In this repo, I will demonstrate how embeddings can be used to explore and visualize relationships between categorical variables. The idea of applying embeddings to categorical data was suggested by [Guo and Berkhahn](https://arxiv.org/abs/1604.06737). I was first introduced to the idea while watching the [Fast.ai](http://www.fast.ai/) course lectures, which I recommend to anyone interested in deep learning.
 
 ### What are entity embeddings?
 
@@ -12,7 +12,7 @@ Embeddings are representations of a piece of data projected to a n-dimensional s
 
 We will generate entity embeddings for the features in the Dermatology Data Set in the UCI Machine Learning Repo. This dataset consists of 366 cases of erythemato-squamous diseases, which often share several similarities particularly on histopathology. There are 6 disease categories: psoriasis, seborrheic dermatitis, lichen planus, pityriasis rosea, chronic dermatitis, and pityriasis rubra pilaris. The dataset looks at 34 features - 11 clinical features (i.e. age, presence of itching, location on body) and 22 histopathological features of tissue biopsy samples seen on microscopy. For more information on the dataset, check out <https://archive.ics.uci.edu/ml/datasets/dermatology>.
 
-We will be using R and PyTorch (via the Reticulate R package: <https://rstudio.github.io/reticulate/>) for this project.
+We will be using R and PyTorch (via the [Reticulate R package](https://rstudio.github.io/reticulate/) for this project.
 
 ### Import useful libraries/packages
 
