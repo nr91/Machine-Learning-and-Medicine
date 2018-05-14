@@ -1,6 +1,6 @@
 Breast FNA Biopsy Classification using Neural Network
 ================
-*NR*
+***NR***
 
 Breast cancer is one of the most common malignancies and can present as a breast mass. One of the many methods of diagnosis is a fine needle aspiration (FNA) biopsy of the mass. Analysis of the cellular elements of the aspiriate can help rule in or rule out a malignancy. The [Breast Cancer Wisconsin (Diagnostic) Data Set](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)) contains features of cell nuclei obtained from images of fine needle aspirates of breast masses. We will apply a neural network model to classify the mass as benign or malignant based on the characteristics of the nuclei of cells found in the aspirate.
 
@@ -31,7 +31,6 @@ from torch.utils.data import TensorDataset, DataLoader
 from torch import nn, optim
 ```
 
-<br>
 
 #### Import data from csv
 
@@ -40,7 +39,6 @@ data <- read.csv('data.csv', header = T)
 head(data)
 ```
 
-<br>
 
 #### Missing values
 
@@ -50,7 +48,7 @@ plot_missing(data)
 
 ![](bc_nn_git_files/figure-markdown_github/missing-1.png)
 
-<br>
+
 
 #### Preprocess
 
@@ -62,7 +60,7 @@ data <- data %>% select(-c(X, id))
 levels(data$diagnosis) <- c('Benign','Malignant')
 ```
 
-<br>
+
 
 #### Class distribution
 
@@ -122,7 +120,6 @@ test_features <- data.matrix(test_features)
 test_labels <- data.matrix(test_labels) - 1
 ```
 
-<br>
 
 #### Convert features and labels for use in PyTorch
 
@@ -143,7 +140,6 @@ testset = TensorDataset(test_features, test_labels)
 test_loader = DataLoader(dataset=testset, batch_size=20, shuffle=False)
 ```
 
-<br>
 
 #### Create model
 
@@ -174,7 +170,6 @@ class net(nn.Module):
 model = net()
 ```
 
-<br>
 
 #### Network Parameters
 
@@ -192,7 +187,6 @@ scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=100, gamma=0.1)
 criterion = nn.BCELoss()
 ```
 
-<br>
 
 #### Train model
 
@@ -244,7 +238,6 @@ for epoch in range(epochs):
   print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}, Test Loss: {:.3f}, Test Accuracy: {:.3%}".format(epoch + 1, train_loss, train_acc, test_loss, test_acc))
 ```
 
-<br>
 
 #### Training results:
 
@@ -287,7 +280,7 @@ plot.roc(as.numeric(test_labels), as.numeric(py$preds), print.auc=T)
 
 With our neural net classifier, we obtain a classification accuracy of 94.7% and an AUC of 0.98. Not bad!
 
-<br> <br>
+<br>
 
 #### Advice for Improvement?
 
