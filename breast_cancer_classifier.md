@@ -2,7 +2,7 @@ Breast FNA Biopsy Classification using Neural Network
 ================
 ***NR***
 
-Breast cancer is one of the most common malignancies and can present as a breast mass. One of the many methods of diagnosis is a fine needle aspiration (FNA) biopsy of the mass. Analysis of the cellular elements of the aspiriate can help rule in or rule out a malignancy. The [Breast Cancer Wisconsin (Diagnostic) Data Set](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)) contains features of cell nuclei obtained from images of fine needle aspirates of breast masses. We will apply a neural network model to classify the mass as benign or malignant based on the characteristics of the nuclei of cells found in the aspirate.
+Breast cancer is one of the most common malignancies and can present as a breast mass. One of the many methods of diagnosis is a fine needle aspiration (FNA) biopsy of the mass. Analysis of the cellular elements of the aspirate can help rule in or rule out a malignancy. The [Breast Cancer Wisconsin (Diagnostic) Data Set](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)) contains features of cell nuclei obtained from images of fine needle aspirates of breast masses. We will apply a neural network model to classify the mass as benign or malignant based on the characteristics of the nuclei of cells found in the aspirate.
 
 We will use PyTorch, a Python package, via Reticulate. Reticulate enables use of Python functions and modules within R as well as interaoperability between R and Python objects. In this example, I will perform all data processing and analysis in R and use PyTorch to create and train a model.
 
@@ -143,7 +143,7 @@ test_loader = DataLoader(dataset=testset, batch_size=20, shuffle=False)
 
 #### Create model
 
-We will use a simple feed-forward neural network with a hidden layer of 100 units followed by a another hidden layer of 50 units and finally an output layer of 1 unit. We will use relu activation functions for the hidden layers and a sigmoid activation for the final output layer.
+We will use a simple feed-forward neural network with a hidden layer of 100 units followed by a hidden layer of 50 units and finally an single output layer. We will use relu activation functions for the hidden layers and a sigmoid activation for the output layer.
 
 ``` python
 #### Python Code
