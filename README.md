@@ -6,6 +6,6 @@ I am an aspiring dermatologist with a background in engineering and a passion fo
 ------------------------------------------
 
 ### Projects
-* **Categorical Embeddings for representing features of Dermatological Diseases** - Applications of entity embeddings, an alternative way of representing categorical variables, towards clinical and histopathological data from several dermatological conditions
+* **Categorical Embeddings for representing features of Dermatological Diseases** - Application of entity embeddings, an alternative way of representing categorical variables, towards clinical and histopathological data from several dermatological conditions
 
-* **Breast Cancer Classification** - Neural network for classifying breast masses as benign or malignant based on cytopathological data obtained from fine needle aspiration (FNA) biopsy data.  
+* **Breast Cancer Classification** - Neural network for classifying breast masses as benign or malignant based on cytopathological data obtained from fine needle aspiration (FNA) biopsies.  
