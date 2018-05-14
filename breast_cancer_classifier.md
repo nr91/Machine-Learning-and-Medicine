@@ -122,7 +122,6 @@ test_labels <- data.matrix(test_labels) - 1
 
 
 #### Convert features and labels for use in PyTorch
-
 We will convert the train and test datasets into tensors and input them into a dataloader
 
 ``` python
@@ -142,7 +141,6 @@ test_loader = DataLoader(dataset=testset, batch_size=20, shuffle=False)
 
 
 #### Create model
-
 We will use a simple feed-forward neural network with a hidden layer of 100 units followed by a hidden layer of 50 units and finally an single output layer. We will use relu activation functions for the hidden layers and a sigmoid activation for the output layer.
 
 ``` python
@@ -172,7 +170,6 @@ model = net()
 
 
 #### Network Parameters
-
 We will use the Adam optimizer with a learning rate of 0.001. Using a scheduler, we will apply a learning rate decay of 10% for every 100 epochs. Our loss function will be binary crossentropy.
 
 ``` python
@@ -189,7 +186,6 @@ criterion = nn.BCELoss()
 
 
 #### Train model
-
 We will train the model for 200 epochs
 
 ``` python
@@ -199,43 +195,43 @@ epochs = 200
 train_losses=[]
 test_losses=[]
 for epoch in range(epochs):
-  # Loop through train data
-  model.train()
-  train_loss=0
-  train_corrects=0
-  for features, labels in train_loader:
-    features, labels = features.to(device), labels.to(device)
-    optimizer.zero_grad()
-    outputs = model(features)
-    loss = criterion(outputs, labels)
-    loss.backward()
-    train_loss += loss.item()
-    preds = torch.round(outputs)
-    train_corrects += preds.eq(labels).sum().item()
-    optimizer.step()
-    
-  train_acc = train_corrects/len(train_loader.dataset)
-  train_loss = train_loss/len(train_loader)
-  train_losses.append(train_loss)
-  
-  # Loop through test data
-  model.eval()
-  test_loss=0
-  test_corrects=0
-  with torch.no_grad():
-    for features, labels in test_loader:
+    # Loop through train data
+    model.train()
+    train_loss=0
+    train_corrects=0
+    for features, labels in train_loader:
         features, labels = features.to(device), labels.to(device)
+        optimizer.zero_grad()
         outputs = model(features)
         loss = criterion(outputs, labels)
-        test_loss += loss.item()
+        loss.backward()
+        train_loss += loss.item()
         preds = torch.round(outputs)
-        test_corrects += preds.eq(labels).sum().item()
-        
-    test_acc = test_corrects/len(test_loader.dataset)
-    test_loss = test_loss/len(test_loader)
-    test_losses.append(test_loss)
+        train_corrects += preds.eq(labels).sum().item()
+        optimizer.step()
+    
+    train_acc = train_corrects/len(train_loader.dataset)
+    train_loss = train_loss/len(train_loader)
+    train_losses.append(train_loss)
   
-  print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}, Test Loss: {:.3f}, Test Accuracy: {:.3%}".format(epoch + 1, train_loss, train_acc, test_loss, test_acc))
+    # Loop through test data
+    model.eval()
+    test_loss=0
+    test_corrects=0
+    with torch.no_grad():
+      for features, labels in test_loader:
+          features, labels = features.to(device), labels.to(device)
+          outputs = model(features)
+          loss = criterion(outputs, labels)
+          test_loss += loss.item()
+          preds = torch.round(outputs)
+          test_corrects += preds.eq(labels).sum().item()
+
+      test_acc = test_corrects/len(test_loader.dataset)
+      test_loss = test_loss/len(test_loader)
+      test_losses.append(test_loss)
+
+    print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}, Test Loss: {:.3f}, Test Accuracy: {:.3%}".format(epoch + 1, train_loss, train_acc, test_loss, test_acc))
 ```
 
 
